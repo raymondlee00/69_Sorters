@@ -1,64 +1,40 @@
 /**
-  Implement an selection sort, in the Sorters structure
+  Implement an insertion sort, in the Sorters structure
  */
 import java.util.ArrayList;
 
-public class SelectionSorter {
-      private ArrayList<Integer> list_iAS;
+public class SelectionSorter extends Sorter {
 
-      /**
-        Construct an instance to process the user's data
-       */
-      public selectionSorter(  ArrayList< String> usersData) {
-        	super(usersData);
-      }
-
-      //from hw62
-      public mySort( ArrayList<Integer> unordered) {
-          list_iAS = unordered;  // in place
-
-          // Iterate through each slot that is to be populated.
-          for( int next = 0
-             ; next < list_iAS.size() -1  // last needs no sort
-             ; next++) {
-
-              // for development and debugging
-              // System.out.println( 
-                  // "so far: " + list_iAS
-                // + " smallest element is at index " + dweebIndex( next)
-                // + " and has the value " + list_iAS.get( dweebIndex( next)));
-
-                /* Find the next smallest. Swap it into place.
-                   Use SET's convenient feature that it returns
-                   the value that it replaces.
-                */
-              list_iAS.set( next
-                          , list_iAS.set( dweebIndex( next)
-                                        , list_iAS.get( next))
-                          );
-              }
-      }
-
-      //from hw62
-      /**
-      @return the index of the smallest element of list_iAS
-              whose index is >= \startAt,
-              using the reigning champ algorithm.
-      helper function for constructor
+    /**
+      Construct an instance to process the user's data
      */
-     private int dweebIndex( int startAt) {
-        // use the starting element as a first guess
-        int dweebAt = startAt;
-        Integer dweeb = list_iAS.get( dweebAt);
+    public SelectionSorter (ArrayList<String> usersData) {
+        super(usersData);
+    }
 
-        for( int testAt = startAt +1
-           ; testAt < list_iAS.size()
-           ; testAt++)
-            if( list_iAS.get( testAt).compareTo( dweeb) < 0) {
-                // Found a smaller value. Remember it.
-                dweebAt = testAt;
-                dweeb = list_iAS.get( dweebAt);
+    /**
+      sort the user's data, implementing selection sort
+      precondition:
+      abstraction: For each element at index i from 0 to the 1 less than the size of the list, select a larger index
+      whose element is the smallest, and swap with the element at index i
+      postcondition: index of iteration exceeds size of the arraylist
+     */
+    public void mySort() {
+        for (int i = 0; i < elements.size(); i++) {
+          int lowestIndex = i;
+          String lowest = elements.get(i);
+
+          for (int n = i; n < elements.size(); n++) {
+            if (elements.get(n).compareTo(lowest) < 0) {
+              lowestIndex = n;
+              lowest = elements.get(n);
             }
-        return dweebAt;
-     }
+          }
+
+          String hold = elements.get(i);
+          elements.set(i,lowest);
+          elements.set(lowestIndex,hold);
+          System.out.println(elements);
+        }
+    }
 }
